@@ -140,7 +140,7 @@ body{
 
 <script>
 /* ✅ 여기에 구글시트 CSV 링크 붙여넣기 */
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmRUaGP5Z7-onrAOIWTONSfiLi2hjdOAUjObYskf2vs5oKNDj-8D2j5Rsmzj6QrLisXVktZMJsPwvW/pub?output=csv";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmRUaGP5Z7-onrAOIWTONSfiLi2hjdOAUjObYskf2vs5oKNDj-8D2j5Rsmzj6QrLisXVktZMJsPwvW/pub?gid=0&single=true&output=csv";
 
 /* ✅ 자동 갱신 시간: 30초 */
 const REFRESH_SECONDS = 30;
@@ -211,7 +211,7 @@ async function loadSheet(){
   const app=document.getElementById("app");
   const status=document.getElementById("status");
 
-  if(!SHEET_URL || SHEET_URL.includes("여기에_구글시트")){
+  if(!SHEET_URL || SHEET_URL.includes("https://docs.google.com/spreadsheets/d/e/2PACX-1vTmRUaGP5Z7-onrAOIWTONSfiLi2hjdOAUjObYskf2vs5oKNDj-8D2j5Rsmzj6QrLisXVktZMJsPwvW/pub?gid=0&single=true&output=csv")){
     app.innerHTML = `
       <div class="error">
         아직 구글시트 CSV 링크가 연결되지 않았습니다.<br>
