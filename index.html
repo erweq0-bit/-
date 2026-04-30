@@ -7,31 +7,178 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eef9ff}
-.header{background:linear-gradient(135deg,#60c8f8,#b9efff);color:white;padding:28px 18px 32px;border-radius:0 0 30px 30px;text-align:center}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#eef9ff;
+  color:#123;
+}
+.header{
+  background:linear-gradient(135deg,#5ec8f7,#bcefff);
+  color:white;
+  padding:30px 18px 34px;
+  border-radius:0 0 32px 32px;
+  text-align:center;
+}
+.header h1{margin:0;font-size:27px}
+.header p{margin:8px 0 0;font-size:14px}
+
 .wrap{max-width:760px;margin:auto;padding:18px}
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
-.tab{border:0;border-radius:16px;padding:12px;background:white;color:#168ac3;font-weight:900}
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:18px;
+}
+.tab{
+  border:0;
+  border-radius:16px;
+  padding:12px;
+  background:white;
+  color:#168ac3;
+  font-weight:900;
+}
 .tab.active{background:#38bdf2;color:white}
+
 .page{display:none}
 .page.active{display:block}
-.day-title{margin:24px 0 14px;padding:10px 14px;background:#4bb8ec;color:white;border-radius:999px;display:inline-block;font-weight:900}
-.timeline{position:relative;padding-left:22px}
-.timeline:before{content:"";position:absolute;left:7px;top:0;bottom:0;width:3px;background:#9ddfff}
-.card{position:relative;background:white;border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(60,160,210,.18)}
-.top{display:flex;justify-content:space-between}
-.time{font-size:20px;font-weight:900;color:#168ac3}
-.type{font-size:12px;background:#e7f8ff;color:#168ac3;padding:5px 9px;border-radius:999px;font-weight:900}
-.place{margin:10px 0 6px;font-size:18px;font-weight:900}
-.memo{font-size:14px;color:#456}
-.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.btn{display:block;text-align:center;text-decoration:none;background:#03c75a;color:white;padding:11px;border-radius:14px;font-weight:900;font-size:13px}
-.btn.sub{background:#eafaf1;color:#03c75a}
-.btn.check{background:#fff3b0;color:#7a5b00}
-.btn.checked{background:#b8f2d0;color:#087a3a}
-.inputbox{width:100%;padding:13px;border-radius:14px;border:1px solid #bfeaff;margin-bottom:10px}
-textarea.inputbox{min-height:90px}
-.loading,.empty{text-align:center;padding:40px;color:#3996c4;font-weight:900}
+
+.day-title{
+  margin:24px 0 14px;
+  padding:10px 15px;
+  background:#4bb8ec;
+  color:white;
+  border-radius:999px;
+  display:inline-block;
+  font-weight:900;
+}
+
+.timeline{
+  position:relative;
+  padding-left:22px;
+}
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:7px;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:#9ddfff;
+}
+
+.card{
+  position:relative;
+  background:white;
+  border-radius:24px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 8px 22px rgba(60,160,210,.18);
+  border:1px solid #d9f3ff;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  left:-21px;
+  top:28px;
+  width:13px;
+  height:13px;
+  background:#31aeea;
+  border:3px solid white;
+  border-radius:50%;
+  box-shadow:0 0 0 3px #bcecff;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.time{
+  font-size:21px;
+  font-weight:900;
+  color:#168ac3;
+}
+.type{
+  font-size:12px;
+  background:#e7f8ff;
+  color:#168ac3;
+  padding:5px 10px;
+  border-radius:999px;
+  font-weight:900;
+}
+
+.place{
+  margin:16px 0 10px;
+  font-size:22px;
+  font-weight:900;
+}
+.memo{
+  font-size:15px;
+  line-height:1.8;
+  color:#456;
+  white-space:pre-line;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  margin-top:16px;
+}
+.btn{
+  flex:1;
+  text-align:center;
+  text-decoration:none;
+  border:0;
+  background:#38bdf2;
+  color:white;
+  padding:8px 6px;
+  border-radius:11px;
+  font-weight:900;
+  font-size:12px;
+}
+.btn.sub{
+  background:#eaf8ff;
+  color:#168ac3;
+}
+.btn.check{
+  background:#fff3b0;
+  color:#7a5b00;
+}
+.btn.checked{
+  background:#b8f2d0;
+  color:#087a3a;
+}
+
+.destination{
+  background:linear-gradient(135deg,#ffffff,#e5f8ff);
+  border-radius:26px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 8px 22px rgba(60,160,210,.15);
+}
+.destination h2{margin:0 0 8px;font-size:24px}
+.destination p{margin:0;color:#456;line-height:1.6}
+
+.map-card:before{display:none}
+
+.inputbox{
+  width:100%;
+  padding:13px;
+  border-radius:14px;
+  border:1px solid #bfeaff;
+  margin-bottom:10px;
+}
+textarea.inputbox{min-height:100px}
+
+.loading,.empty{
+  text-align:center;
+  padding:40px;
+  color:#3996c4;
+  font-weight:900;
+}
 </style>
 </head>
 
@@ -39,12 +186,14 @@ textarea.inputbox{min-height:90px}
 
 <div class="header">
   <h1>강릉여행 시간표 🌊</h1>
+  <p>날짜별 일정 · 장소보기 · 검색하기 · 메모</p>
 </div>
 
 <div class="wrap">
+
   <div class="tabs">
     <button class="tab active" onclick="showPage('schedule',this)">시간표</button>
-    <button class="tab" onclick="showPage('maps',this)">지도</button>
+    <button class="tab" onclick="showPage('maps',this)">지도목록</button>
     <button class="tab" onclick="showPage('memo',this)">메모</button>
   </div>
 
@@ -53,15 +202,26 @@ textarea.inputbox{min-height:90px}
   </div>
 
   <div id="maps" class="page">
-    <div id="mapList" class="loading">불러오는 중...</div>
+    <div class="destination">
+      <h2>📍 여행 목적지: 강릉</h2>
+      <p>아래 장소를 누르면 네이버에서 바로 장소 확인, 길찾기, 검색을 할 수 있습니다.</p>
+      <div class="actions">
+        <a class="btn" href="https://search.naver.com/search.naver?query=%EA%B0%95%EB%A6%89%20%EC%A7%80%EB%8F%84" target="_blank">강릉 지도</a>
+        <a class="btn sub" href="https://search.naver.com/search.naver?query=%EA%B0%95%EB%A6%89%20%EB%A7%9B%EC%A7%91" target="_blank">강릉 맛집</a>
+        <a class="btn sub" href="https://search.naver.com/search.naver?query=%EA%B0%95%EB%A6%89%20%EA%B0%80%EB%B3%BC%EB%A7%8C%ED%95%9C%EA%B3%B3" target="_blank">가볼만한곳</a>
+      </div>
+    </div>
+
+    <div id="mapList" class="loading">지도 목록 불러오는 중...</div>
   </div>
 
   <div id="memo" class="page">
     <input id="memoName" class="inputbox" placeholder="이름">
-    <textarea id="memoText" class="inputbox" placeholder="메모 입력"></textarea>
-    <button class="btn" onclick="saveMemo()">저장</button>
-    <div id="savedMemo" class="card"></div>
+    <textarea id="memoText" class="inputbox" placeholder="여행 메모를 입력하세요"></textarea>
+    <button class="btn" onclick="saveMemo()">메모 저장</button>
+    <div id="savedMemo" class="card" style="margin-top:14px"></div>
   </div>
+
 </div>
 
 <script>
@@ -77,110 +237,165 @@ function showPage(id,btn){
 }
 
 function parseCSV(text){
-  return text.trim().split("\n").map(r=>r.split(","));
+  const rows=[]; 
+  let row=[], cell="", quote=false;
+
+  for(let i=0;i<text.length;i++){
+    const c=text[i], n=text[i+1];
+
+    if(c === '"' && quote && n === '"'){
+      cell+='"';
+      i++;
+    }else if(c === '"'){
+      quote=!quote;
+    }else if(c === "," && !quote){
+      row.push(cell.trim());
+      cell="";
+    }else if((c === "\n" || c === "\r") && !quote){
+      if(cell || row.length){
+        row.push(cell.trim());
+        rows.push(row);
+        row=[];
+        cell="";
+      }
+    }else{
+      cell+=c;
+    }
+  }
+
+  if(cell || row.length){
+    row.push(cell.trim());
+    rows.push(row);
+  }
+
+  return rows;
 }
 
-function naverMap(place){
+function placeView(place){
   return "https://search.naver.com/search.naver?query=" + encodeURIComponent(place + " 지도");
 }
-function naverRoute(place){
-  return "https://search.naver.com/search.naver?query=" + encodeURIComponent(place + " 길찾기");
-}
-function naverSearch(place){
+
+function placeSearch(place){
   return "https://search.naver.com/search.naver?query=" + encodeURIComponent(place);
 }
 
+function placeRoute(place){
+  return "https://search.naver.com/search.naver?query=" + encodeURIComponent(place + " 길찾기");
+}
+
 function isChecked(key){
-  return localStorage.getItem(key)==="Y";
+  return localStorage.getItem("check_" + key)==="Y";
 }
 
 function toggleCheck(key,btn){
-  const v=isChecked(key);
-  localStorage.setItem(key, v?"N":"Y");
-  btn.classList.toggle("checked",!v);
-  btn.textContent=!v?"완료":"체크";
+  const checked=isChecked(key);
+  localStorage.setItem("check_" + key, checked ? "N" : "Y");
+  btn.classList.toggle("checked", !checked);
+  btn.textContent = !checked ? "완료" : "체크";
 }
 
 function load(){
-  fetch(SHEET_URL+"&t="+Date.now())
-  .then(r=>r.text())
-  .then(t=>{
-    const rows=parseCSV(t);
-    allData=rows.slice(1);
+  fetch(SHEET_URL + "&t=" + Date.now())
+  .then(res=>res.text())
+  .then(text=>{
+    const rows=parseCSV(text);
+
+    allData=rows.slice(1).map(r=>({
+      date:r[0] || "",
+      time:r[1] || "",
+      type:r[2] || "",
+      place:r[3] || "",
+      memo:r[4] || ""
+    })).filter(x=>x.date || x.place);
 
     renderSchedule();
     renderMapList();
     loadMemo();
+  })
+  .catch(()=>{
+    document.getElementById("app").innerHTML="<div class='empty'>일정을 불러오지 못했습니다.</div>";
+    document.getElementById("mapList").innerHTML="<div class='empty'>지도 목록을 불러오지 못했습니다.</div>";
   });
 }
 
 function renderSchedule(){
-  let html="",last="";
-  allData.forEach(r=>{
-    const [date,time,type,place,memo]=r;
+  let html="";
+  let currentDate="";
 
-    if(date!==last){
-      if(last) html+="</div>";
-      last=date;
-      html+=`<div class="day-title">${date}</div><div class="timeline">`;
+  allData.forEach(item=>{
+    if(item.date !== currentDate){
+      if(currentDate) html+="</div>";
+      currentDate=item.date;
+      html+=`<div class="day-title">${item.date}</div><div class="timeline">`;
     }
 
-    const key=date+time+place;
+    const key=item.date + "_" + item.time + "_" + item.place;
     const checked=isChecked(key);
 
     html+=`
-    <div class="card">
-      <div class="top">
-        <div class="time">${time||"미정"}</div>
-        <div class="type">${type||""}</div>
+      <div class="card">
+        <div class="top">
+          <div class="time">${item.time || "시간 미정"}</div>
+          <div class="type">${item.type || "일정"}</div>
+        </div>
+
+        <div class="place">${item.place || "장소 미정"}</div>
+        <div class="memo">${item.memo || ""}</div>
+
+        <div class="actions">
+          <a class="btn" href="${placeView(item.place)}" target="_blank">장소보기</a>
+          <a class="btn sub" href="${placeSearch(item.place)}" target="_blank">검색하기</a>
+          <button class="btn check ${checked ? "checked" : ""}" onclick="toggleCheck('${key}',this)">
+            ${checked ? "완료" : "체크"}
+          </button>
+        </div>
       </div>
-      <div class="place">${place||""}</div>
-      <div class="memo">${memo||""}</div>
-      <div class="actions">
-        <a class="btn" href="${naverMap(place)}" target="_blank">지도</a>
-        <a class="btn sub" href="${naverRoute(place)}" target="_blank">길찾기</a>
-        <button class="btn check ${checked?"checked":""}" onclick="toggleCheck('${key}',this)">
-          ${checked?"완료":"체크"}
-        </button>
-      </div>
-    </div>`;
+    `;
   });
+
   if(html) html+="</div>";
-  document.getElementById("app").innerHTML=html||"데이터 없음";
+  document.getElementById("app").innerHTML = html || "<div class='empty'>등록된 일정이 없습니다.</div>";
 }
 
 function renderMapList(){
   let html="";
-  allData.forEach(r=>{
-    const [date,time,type,place,memo]=r;
-    if(!place) return;
+
+  allData.forEach(item=>{
+    if(!item.place) return;
 
     html+=`
-    <div class="card">
-      <div class="type">${date} ${time||""}</div>
-      <div class="place">${place}</div>
-      <div class="actions">
-        <a class="btn" href="${naverMap(place)}" target="_blank">지도</a>
-        <a class="btn sub" href="${naverRoute(place)}" target="_blank">길찾기</a>
-        <a class="btn sub" href="${naverSearch(place)}" target="_blank">검색</a>
+      <div class="card map-card">
+        <div class="type">${item.date} · ${item.time || "시간 미정"} · ${item.type || "일정"}</div>
+        <div class="place">📌 ${item.place}</div>
+        <div class="memo">${item.memo || ""}</div>
+
+        <div class="actions">
+          <a class="btn" href="${placeView(item.place)}" target="_blank">장소보기</a>
+          <a class="btn sub" href="${placeRoute(item.place)}" target="_blank">길찾기</a>
+          <a class="btn sub" href="${placeSearch(item.place)}" target="_blank">검색하기</a>
+        </div>
       </div>
-    </div>`;
+    `;
   });
-  document.getElementById("mapList").innerHTML=html||"장소 없음";
+
+  document.getElementById("mapList").innerHTML = html || "<div class='empty'>등록된 장소가 없습니다.</div>";
 }
 
 function saveMemo(){
-  localStorage.setItem("memo_name",document.getElementById("memoName").value);
-  localStorage.setItem("memo_text",document.getElementById("memoText").value);
+  localStorage.setItem("memo_name", document.getElementById("memoName").value);
+  localStorage.setItem("memo_text", document.getElementById("memoText").value);
   loadMemo();
 }
 
 function loadMemo(){
-  const n=localStorage.getItem("memo_name")||"";
-  const t=localStorage.getItem("memo_text")||"";
-  document.getElementById("memoName").value=n;
-  document.getElementById("memoText").value=t;
-  document.getElementById("savedMemo").innerHTML=t?`<b>${n}</b><div>${t}</div>`:"메모 없음";
+  const name=localStorage.getItem("memo_name") || "";
+  const text=localStorage.getItem("memo_text") || "";
+
+  document.getElementById("memoName").value=name;
+  document.getElementById("memoText").value=text;
+
+  document.getElementById("savedMemo").innerHTML =
+    text ? `<b>${name || "익명"}</b><div class="memo" style="margin-top:8px">${text}</div>` : "저장된 메모가 없습니다.";
 }
 
 load();
