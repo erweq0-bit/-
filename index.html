@@ -7,105 +7,248 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#bacee0;
+  background:linear-gradient(180deg,#dff4ff,#f7fcff);
+  color:#123;
 }
+
 .header{
-  background:#ffe812;
-  padding:16px;
+  background:#7ecdf4;
+  color:white;
+  padding:24px 16px 20px;
   text-align:center;
-  font-weight:800;
+  border-radius:0 0 28px 28px;
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
+
+.header h1{
+  margin:0;
+  font-size:24px;
+}
+
+.header p{
+  margin:6px 0 0;
+  font-size:14px;
+  opacity:.95;
+}
+
 .wrap{
   max-width:720px;
   margin:auto;
   padding:16px;
 }
-.chat{
-  display:flex;
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
   gap:8px;
-  margin-bottom:12px;
+  margin:16px 0;
 }
-.profile{
-  width:36px;
-  height:36px;
-  border-radius:12px;
-  background:#ffe812;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.bubble{
+
+.tab{
+  border:0;
+  border-radius:18px;
+  padding:10px 6px;
   background:white;
-  padding:12px;
-  border-radius:12px;
+  color:#2684b8;
+  font-weight:800;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
 }
-.time{font-size:12px;color:#666}
-.title{font-weight:800}
-.memo{font-size:14px}
-.day{
-  text-align:center;
-  margin:20px 0 10px;
-}
-.day span{
-  background:#999;
+
+.tab.active{
+  background:#38aeea;
   color:white;
-  padding:4px 10px;
-  border-radius:20px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.card{
+  background:white;
+  border-radius:22px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:0 5px 16px rgba(64,156,210,.18);
+  border:1px solid #d8f1ff;
+}
+
+.card .date{
+  display:inline-block;
+  background:#e5f7ff;
+  color:#1689c4;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.card h3{
+  margin:4px 0 8px;
+  font-size:18px;
+}
+
+.info{
+  font-size:14px;
+  line-height:1.6;
+  color:#456;
+}
+
+.badge{
+  display:inline-block;
+  background:#fff3b0;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+  margin-top:8px;
+}
+
+.mapbox{
+  width:100%;
+  height:360px;
+  border:0;
+  border-radius:22px;
+  box-shadow:0 5px 16px rgba(64,156,210,.18);
+}
+
+.comment{
+  background:#f0faff;
+  border-left:5px solid #38aeea;
+}
+
+.loading{
+  text-align:center;
+  padding:40px 0;
+  color:#348bb6;
+  font-weight:800;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">강릉여행계획 💬</div>
-<div class="wrap" id="app">불러오는 중...</div>
+<div class="header">
+  <h1>강릉여행 🌊</h1>
+  <p>장소 · 계획 · 지도 · 댓글을 한눈에</p>
+</div>
+
+<div class="wrap">
+
+  <div class="tabs">
+    <button class="tab active" onclick="showPage('places', this)">장소</button>
+    <button class="tab" onclick="showPage('plans', this)">계획</button>
+    <button class="tab" onclick="showPage('map', this)">지도</button>
+    <button class="tab" onclick="showPage('comments', this)">댓글</button>
+  </div>
+
+  <div id="places" class="page active">
+    <div class="loading">장소 불러오는 중...</div>
+  </div>
+
+  <div id="plans" class="page">
+    <div class="loading">계획 불러오는 중...</div>
+  </div>
+
+  <div id="map" class="page">
+    <iframe
+      class="mapbox"
+      src="https://www.google.com/maps?q=강릉&output=embed">
+    </iframe>
+  </div>
+
+  <div id="comments" class="page">
+    <div class="loading">댓글 불러오는 중...</div>
+  </div>
+
+</div>
 
 <script>
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmRUaGP5Z7-onrAOIWTONSfiLi2hjdOAUjObYskf2vs5oKNDj-8D2j5Rsmzj6QrLisXVktZMJsPwvW/pub?gid=0&single=true&output=csv";
 
+function showPage(id, btn){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  btn.classList.add("active");
+}
+
 function parseCSV(text){
-  return text.split("\n").map(row => row.split(","));
+  const rows = text.trim().split("\n").map(row => row.split(","));
+  return rows.slice(1);
 }
 
 function load(){
   fetch(SHEET_URL + "&t=" + Date.now())
   .then(res=>res.text())
   .then(text=>{
-    const rows=parseCSV(text);
-    const header=rows[0];
+    const rows = parseCSV(text);
 
-    let html="";
-    let lastDate="";
+    let placesHTML = "";
+    let plansHTML = "";
+    let commentsHTML = "";
 
-    rows.slice(1).forEach(r=>{
-      if(!r[0]) return;
+    rows.forEach(r=>{
+      const date = r[0] || "";
+      const time = r[1] || "";
+      const place = r[2] || "";
+      const plan = r[3] || "";
+      const map = r[4] || "";
+      const comment = r[5] || "";
 
-      const date=r[0];
-      const time=r[1];
-      const title=r[2];
-      const memo=r[3];
-
-      if(date!==lastDate){
-        html+=`<div class="day"><span>${date}</span></div>`;
-        lastDate=date;
+      if(place){
+        placesHTML += `
+          <div class="card">
+            <div class="date">${date}</div>
+            <h3>📍 ${place}</h3>
+            <div class="info">
+              시간: ${time || "미정"}<br>
+              ${plan || ""}
+            </div>
+            ${map ? `<div class="badge">지도 있음</div>` : ""}
+          </div>
+        `;
       }
 
-      html+=`
-      <div class="chat">
-        <div class="profile">🌊</div>
-        <div class="bubble">
-          <div class="time">${time}</div>
-          <div class="title">${title}</div>
-          <div class="memo">${memo||""}</div>
-        </div>
-      </div>
-      `;
+      if(plan){
+        plansHTML += `
+          <div class="card">
+            <div class="date">${date}</div>
+            <h3>🗓️ ${time || "일정"}</h3>
+            <div class="info">
+              장소: ${place || "미정"}<br>
+              계획: ${plan}
+            </div>
+          </div>
+        `;
+      }
+
+      if(comment){
+        commentsHTML += `
+          <div class="card comment">
+            <div class="date">${date}</div>
+            <h3>💬 ${place || "메모"}</h3>
+            <div class="info">${comment}</div>
+          </div>
+        `;
+      }
     });
 
-    document.getElementById("app").innerHTML=html;
+    document.getElementById("places").innerHTML = placesHTML || "장소가 없습니다.";
+    document.getElementById("plans").innerHTML = plansHTML || "계획이 없습니다.";
+    document.getElementById("comments").innerHTML = commentsHTML || "댓글이 없습니다.";
+  })
+  .catch(()=>{
+    document.getElementById("places").innerHTML = "불러오기 실패";
+    document.getElementById("plans").innerHTML = "불러오기 실패";
+    document.getElementById("comments").innerHTML = "불러오기 실패";
   });
 }
 
