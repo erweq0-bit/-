@@ -3,109 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>강릉여행 시간표</title>
+<title>강릉여행</title>
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eef9ff;color:#123}
-.header{background:linear-gradient(135deg,#5ec8f7,#bcefff);color:white;padding:30px 18px 34px;border-radius:0 0 32px 32px;text-align:center}
-.header h1{margin:0;font-size:27px}
-.header p{margin:8px 0 0;font-size:14px}
-.wrap{max-width:760px;margin:auto;padding:18px}
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
-.tab{border:0;border-radius:16px;padding:12px;background:white;color:#168ac3;font-weight:900}
+body{margin:0;font-family:sans-serif;background:#eef9ff}
+
+.header{
+  background:linear-gradient(135deg,#5ec8f7,#bcefff);
+  color:white;padding:28px;text-align:center
+}
+
+.wrap{max-width:760px;margin:auto;padding:16px}
+
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;margin-bottom:16px
+}
+.tab{
+  padding:12px;border:0;border-radius:14px;
+  background:white;font-weight:800
+}
 .tab.active{background:#38bdf2;color:white}
+
 .page{display:none}
 .page.active{display:block}
 
-.day-title{margin:24px 0 14px;padding:10px 15px;background:#4bb8ec;color:white;border-radius:999px;display:inline-block;font-weight:900}
-.timeline{position:relative;padding-left:22px}
-.timeline:before{content:"";position:absolute;left:7px;top:0;bottom:0;width:3px;background:#9ddfff}
-.card{position:relative;background:white;border-radius:24px;padding:22px;margin-bottom:18px;box-shadow:0 8px 22px rgba(60,160,210,.18);border:1px solid #d9f3ff}
-.card:before{content:"";position:absolute;left:-21px;top:28px;width:13px;height:13px;background:#31aeea;border:3px solid white;border-radius:50%;box-shadow:0 0 0 3px #bcecff}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.time{font-size:21px;font-weight:900;color:#168ac3}
-.type{font-size:12px;background:#e7f8ff;color:#168ac3;padding:5px 10px;border-radius:999px;font-weight:900}
-.place{margin:16px 0 10px;font-size:22px;font-weight:900}
-.memo{font-size:15px;line-height:1.8;color:#456;white-space:pre-line}
-.actions{display:flex;gap:7px;margin-top:16px}
-.btn{flex:1;text-align:center;text-decoration:none;border:0;background:#38bdf2;color:white;padding:8px 6px;border-radius:11px;font-weight:900;font-size:12px}
-.btn.sub{background:#eaf8ff;color:#168ac3}
-.btn.check{background:#fff3b0;color:#7a5b00}
-.btn.checked{background:#b8f2d0;color:#087a3a}
+/* 앨범 */
+.album-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
 
-.destination{background:linear-gradient(135deg,#ffffff,#e5f8ff);border-radius:26px;padding:22px;margin-bottom:18px;box-shadow:0 8px 22px rgba(60,160,210,.15)}
-.destination h2{margin:0 0 8px;font-size:24px}
-.destination p{margin:0;color:#456;line-height:1.6}
-.map-preview{margin-top:16px;border-radius:22px;overflow:hidden;height:260px;border:1px solid #cdefff}
-.map-preview iframe{width:100%;height:100%;border:0}
-.section-title{margin:24px 0 14px;font-size:19px;color:#168ac3}
+.album-card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,.1)
+}
 
-.album-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.album-card{background:white;border-radius:22px;overflow:hidden;box-shadow:0 8px 22px rgba(60,160,210,.18);border:1px solid #d9f3ff}
-.album-thumb{aspect-ratio:1/1;background:linear-gradient(135deg,#8ddcff,#e8f8ff);display:flex;align-items:center;justify-content:center;font-size:42px}
-.album-body{padding:14px}
-.album-meta{font-size:11px;font-weight:900;color:#168ac3;background:#e7f8ff;padding:5px 8px;border-radius:999px;display:inline-block;margin-bottom:8px}
-.album-title{font-size:17px;font-weight:900;margin-bottom:7px;line-height:1.3}
-.album-desc{font-size:13px;color:#456;line-height:1.5;min-height:40px;white-space:pre-line}
-.album-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
-.album-actions .btn{font-size:11px;padding:8px 5px}
+.album-thumb{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#dff4ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
 
-.inputbox{width:100%;padding:13px;border-radius:14px;border:1px solid #bfeaff;margin-bottom:10px}
-textarea.inputbox{min-height:100px}
-.loading,.empty{text-align:center;padding:40px;color:#3996c4;font-weight:900}
+.album-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.album-body{padding:10px}
+
+.album-title{
+  font-weight:900;
+  font-size:15px;
+  margin-bottom:6px;
+}
+
+.album-meta{
+  font-size:11px;
+  color:#168ac3;
+  margin-bottom:6px;
+}
+
+.album-desc{
+  font-size:12px;
+  color:#555;
+  min-height:32px;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:8px;
+}
+
+.btn{
+  text-align:center;
+  padding:7px;
+  border-radius:10px;
+  background:#38bdf2;
+  color:white;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:800;
+}
+
+.btn.sub{
+  background:#eaf8ff;
+  color:#168ac3;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="header">
-  <h1>강릉여행 시간표 🌊</h1>
-  <p>날짜별 일정 · 장소보기 · 검색하기 · 지도목록</p>
+  <h2>강릉 여행 🌊</h2>
 </div>
 
 <div class="wrap">
 
-  <div class="tabs">
-    <button class="tab active" onclick="showPage('schedule',this)">시간표</button>
-    <button class="tab" onclick="showPage('maps',this)">지도목록</button>
-    <button class="tab" onclick="showPage('memo',this)">메모</button>
-  </div>
+<div class="tabs">
+  <button class="tab active" onclick="showPage('map',this)">지도</button>
+  <button class="tab" onclick="showPage('schedule',this)">시간표</button>
+</div>
 
-  <div id="schedule" class="page active">
-    <div id="app" class="loading">불러오는 중...</div>
-  </div>
+<div id="map" class="page active">
+  <div id="mapList">불러오는 중...</div>
+</div>
 
-  <div id="maps" class="page">
-    <div class="destination">
-      <h2>📍 메인 여행지: 강릉</h2>
-      <p>시간표에 정리한 장소들을 앨범형 카드로 확인할 수 있습니다.</p>
-
-      <div class="map-preview">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=128.80,37.68,129.08,37.88&layer=mapnik&marker=37.7519,128.8761"></iframe>
-      </div>
-
-      <div class="actions">
-        <a class="btn" href="https://search.naver.com/search.naver?query=강릉 지도" target="_blank">강릉 지도보기</a>
-        <a class="btn sub" href="https://search.naver.com/search.naver?query=강릉 맛집" target="_blank">강릉 맛집</a>
-      </div>
-    </div>
-
-    <h3 class="section-title">🗂️ 시간표 장소 앨범</h3>
-    <div id="mapList" class="loading">장소 목록 불러오는 중...</div>
-  </div>
-
-  <div id="memo" class="page">
-    <input id="memoName" class="inputbox" placeholder="이름">
-    <textarea id="memoText" class="inputbox" placeholder="여행 메모를 입력하세요"></textarea>
-    <button class="btn" onclick="saveMemo()">메모 저장</button>
-    <div id="savedMemo" class="card" style="margin-top:14px"></div>
-  </div>
+<div id="schedule" class="page">
+  <div id="app">불러오는 중...</div>
+</div>
 
 </div>
 
 <script>
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmRUaGP5Z7-onrAOIWTONSfiLi2hjdOAUjObYskf2vs5oKNDj-8D2j5Rsmzj6QrLisXVktZMJsPwvW/pub?output=csv";
+const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTmRUaGP5Z7-onrAOIWTONSfiLi2hjdOAUjObYskf2vs5oKNDj-8D2j5Rsmzj6QrLisXVktZMJsPwvW/pub?output=csv";
 
 let allData=[];
 
@@ -116,193 +141,83 @@ function showPage(id,btn){
   btn.classList.add("active");
 }
 
-function parseCSV(text){
-  const rows=[]; 
-  let row=[], cell="", quote=false;
-
-  for(let i=0;i<text.length;i++){
-    const c=text[i], n=text[i+1];
-
-    if(c === '"' && quote && n === '"'){
-      cell+='"';
-      i++;
-    }else if(c === '"'){
-      quote=!quote;
-    }else if(c === "," && !quote){
-      row.push(cell.trim());
-      cell="";
-    }else if((c === "\n" || c === "\r") && !quote){
-      if(cell || row.length){
-        row.push(cell.trim());
-        rows.push(row);
-        row=[];
-        cell="";
-      }
-    }else{
-      cell+=c;
-    }
-  }
-
-  if(cell || row.length){
-    row.push(cell.trim());
-    rows.push(row);
-  }
-
-  return rows;
+function parseCSV(t){
+  return t.trim().split("\n").map(r=>r.split(","));
 }
 
-function placeView(place){
-  return "https://search.naver.com/search.naver?query=" + encodeURIComponent(place + " 지도");
+function placeView(p){
+  return "https://search.naver.com/search.naver?query="+encodeURIComponent(p+" 지도");
 }
 
-function placeSearch(place){
-  return "https://search.naver.com/search.naver?query=" + encodeURIComponent(place);
-}
-
-function placeRoute(place){
-  return "https://search.naver.com/search.naver?query=" + encodeURIComponent(place + " 길찾기");
+function placeSearch(p){
+  return "https://search.naver.com/search.naver?query="+encodeURIComponent(p);
 }
 
 function getIcon(type){
-  if(type.includes("식당") || type.includes("맛집")) return "🍽️";
+  if(type.includes("식당")) return "🍽️";
   if(type.includes("카페")) return "☕";
-  if(type.includes("숙소")) return "🏨";
-  if(type.includes("이동")) return "🚗";
-  if(type.includes("관광") || type.includes("장소")) return "📍";
-  return "🌊";
-}
-
-function isChecked(key){
-  return localStorage.getItem("check_" + key)==="Y";
-}
-
-function toggleCheck(key,btn){
-  const checked=isChecked(key);
-  localStorage.setItem("check_" + key, checked ? "N" : "Y");
-  btn.classList.toggle("checked", !checked);
-  btn.textContent = !checked ? "완료" : "체크";
+  return "📍";
 }
 
 function load(){
-  fetch(SHEET_URL + "&t=" + Date.now())
-  .then(res=>res.text())
-  .then(text=>{
-    const rows=parseCSV(text);
-
+  fetch(SHEET_URL+"&t="+Date.now())
+  .then(r=>r.text())
+  .then(t=>{
+    const rows=parseCSV(t);
     allData=rows.slice(1).map(r=>({
-      date:r[0] || "",
-      time:r[1] || "",
-      type:r[2] || "",
-      place:r[3] || "",
-      memo:r[4] || ""
-    })).filter(x=>x.date || x.place);
+      date:r[0],
+      time:r[1],
+      type:r[2],
+      place:r[3],
+      memo:r[4],
+      img:r[5]
+    }));
 
-    renderSchedule();
-    renderMapList();
-    loadMemo();
-  })
-  .catch(()=>{
-    document.getElementById("app").innerHTML="<div class='empty'>일정을 불러오지 못했습니다.</div>";
-    document.getElementById("mapList").innerHTML="<div class='empty'>지도 목록을 불러오지 못했습니다.</div>";
+    renderMap();
   });
 }
 
-function renderSchedule(){
-  let html="";
-  let currentDate="";
-
-  allData.forEach(item=>{
-    if(item.date !== currentDate){
-      if(currentDate) html+="</div>";
-      currentDate=item.date;
-      html+=`<div class="day-title">${item.date}</div><div class="timeline">`;
-    }
-
-    const key=item.date + "_" + item.time + "_" + item.place;
-    const checked=isChecked(key);
-
-    html+=`
-      <div class="card">
-        <div class="top">
-          <div class="time">${item.time || "시간 미정"}</div>
-          <div class="type">${item.type || "일정"}</div>
-        </div>
-
-        <div class="place">${item.place || "장소 미정"}</div>
-        <div class="memo">${item.memo || ""}</div>
-
-        <div class="actions">
-          <a class="btn" href="${placeView(item.place)}" target="_blank">장소보기</a>
-          <a class="btn sub" href="${placeSearch(item.place)}" target="_blank">검색하기</a>
-          <button class="btn check ${checked ? "checked" : ""}" onclick="toggleCheck('${key}',this)">
-            ${checked ? "완료" : "체크"}
-          </button>
-        </div>
-      </div>
-    `;
-  });
-
-  if(html) html+="</div>";
-  document.getElementById("app").innerHTML = html || "<div class='empty'>등록된 일정이 없습니다.</div>";
-}
-
-function renderMapList(){
-  let html = `<div class="album-grid">`;
+function renderMap(){
+  let html='<div class="album-grid">';
 
   allData.forEach(item=>{
     if(!item.place) return;
 
-    html += `
-      <div class="album-card">
-        <div class="album-thumb">
-          ${getIcon(item.type || "")}
+    html+=`
+    <div class="album-card">
+      <div class="album-thumb">
+        ${
+          item.img
+          ? `<img src="${item.img}">`
+          : getIcon(item.type||"")
+        }
+      </div>
+
+      <div class="album-body">
+        <div class="album-meta">
+          ${item.date||""} · ${item.time||""}
         </div>
 
-        <div class="album-body">
-          <div class="album-meta">
-            ${item.date || ""} · ${item.time || "시간 미정"}
-          </div>
+        <div class="album-title">${item.place}</div>
 
-          <div class="album-title">${item.place}</div>
+        <div class="album-desc">
+          ${item.memo||""}
+        </div>
 
-          <div class="album-desc">
-            ${item.memo || "네이버에서 장소 정보를 확인해보세요."}
-          </div>
-
-          <div class="album-actions">
-            <a class="btn" href="${placeView(item.place)}" target="_blank">장소보기</a>
-            <a class="btn sub" href="${placeSearch(item.place)}" target="_blank">검색하기</a>
-          </div>
+        <div class="actions">
+          <a class="btn" href="${placeView(item.place)}" target="_blank">장소보기</a>
+          <a class="btn sub" href="${placeSearch(item.place)}" target="_blank">검색</a>
         </div>
       </div>
+    </div>
     `;
   });
 
-  html += `</div>`;
-
-  document.getElementById("mapList").innerHTML =
-    allData.length ? html : "<div class='empty'>등록된 장소가 없습니다.</div>";
-}
-
-function saveMemo(){
-  localStorage.setItem("memo_name", document.getElementById("memoName").value);
-  localStorage.setItem("memo_text", document.getElementById("memoText").value);
-  loadMemo();
-}
-
-function loadMemo(){
-  const name=localStorage.getItem("memo_name") || "";
-  const text=localStorage.getItem("memo_text") || "";
-
-  document.getElementById("memoName").value=name;
-  document.getElementById("memoText").value=text;
-
-  document.getElementById("savedMemo").innerHTML =
-    text ? `<b>${name || "익명"}</b><div class="memo" style="margin-top:8px">${text}</div>` : "저장된 메모가 없습니다.";
+  html+='</div>';
+  document.getElementById("mapList").innerHTML=html;
 }
 
 load();
-setInterval(load,30000);
 </script>
 
 </body>
